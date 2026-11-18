@@ -27,6 +27,8 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #00
 .frame{position:relative;aspect-ratio:9/16;background:#f3f0ec;border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;color:#777;font-size:.95rem;padding:20px}
 .frame img,.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
 .frame button{position:absolute;inset:0;background:none;border:0;cursor:pointer}
+.frame.playing{background:#000;padding:0}
+.frame.playing iframe{inset:auto;left:0;top:-76px;height:calc(100% + 152px)}
 .frame button::after{content:"";position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") center/36px no-repeat;box-shadow:0 2px 12px rgba(0,0,0,.25)}
 .brand{margin-bottom:72px}
 .brand:last-child{margin-bottom:0}
@@ -87,7 +89,7 @@ BRANDS.forEach(b=>{
     const c=document.createElement('article');
     const f=document.createElement('div'); f.className='frame';
     f.innerHTML='<img src="https://img.youtube.com/vi/'+id+'/hqdefault.jpg" alt="'+title+'" loading="lazy"><button aria-label="Play '+title+'"></button>';
-    f.querySelector('button').onclick=()=>{f.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="'+title+'"></iframe>'};
+    f.querySelector('button').onclick=()=>{f.classList.add('playing');f.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&controls=0&rel=0&modestbranding=1&playsinline=1&fs=0&disablekb=1&iv_load_policy=3&loop=1&playlist='+id+'" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="'+title+'"></iframe>'};
     const t=document.createElement('div'); t.className='title'; t.textContent=title;
     const d=document.createElement('details');
     d.innerHTML='<summary>Type of UGC</summary><ul>'+b.type.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
